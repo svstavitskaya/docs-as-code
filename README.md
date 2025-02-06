@@ -5,7 +5,8 @@
 
 * код
 * рисунок диаграммы
-  
+  ```mermaid
+graph TD;
 sequenceDiagram
 actor Организатор as Foo
 participant Система as Foo1
@@ -24,3 +25,6 @@ Foo2 -> Foo1 : Сформировать данные\nдля рассылки
 Foo1 -> Foo2 : Данные отправки для Сервиса записываются\nв таблицу "sms"
 activate Foo3
 Foo1 -> Foo3 : Отправить рассылку группе контактов\nhttps://email:api_key@gate.smsaero.ru/v2/sms/send?\nnumbers[]=79990000000&numbers[]=79990000001\n&text=your+text&sign=SMS Aero\n&callbackUrl=https://your.site
+
+```
+
