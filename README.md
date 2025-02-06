@@ -5,26 +5,28 @@
 
 * код
 * рисунок диаграммы
-  ```mermaid
-graph TD;
+  
+```mermaid
 sequenceDiagram
-actor Организатор as Foo
-participant Система as Foo1
-database    Database    as Foo2
-participant API_СМС as Foo3
-actor Администратор as Foo5
-actor Волонтёр as Foo4
+actor Организатор
+participant Система
+participant Database
+participant SmsApi
+actor Администратор
+actor Волонтёр
 
-activate Foo
-Foo -> Foo1 : Нажимает на кнопку\n"Отправить новое объявление\nна проект"
-deactivate Foo
-activate Foo1
-Foo1 -> Foo2 : Создает запись новго объявления
-activate Foo2
-Foo2 -> Foo1 : Сформировать данные\nдля рассылки
-Foo1 -> Foo2 : Данные отправки для Сервиса записываются\nв таблицу "sms"
-activate Foo3
-Foo1 -> Foo3 : Отправить рассылку группе контактов\nhttps://email:api_key@gate.smsaero.ru/v2/sms/send?\nnumbers[]=79990000000&numbers[]=79990000001\n&text=your+text&sign=SMS Aero\n&callbackUrl=https://your.site
-
+Организатор ->+Система : Нажимает на кнопку\n"Отправить новое объявление\nна проект"
+Система ->+Database : Создает запись новго объявления
+Database ->+Система : Сформировать данные\nдля рассылки
+Система ->+Database : Данные отправки для Сервиса записываются\nв таблицу "sms"
+Система ->+API_СМС : Отправить рассылку группе контактов\nhttps://email:api_key@gate.smsaero.ru/v2/sms/send?\nnumbers[]=79990000000&numbers[]=79990000001\n&text=your+text&sign=SMS Aero\n&callbackUrl=https://your.site
 ```
 
+### Отправка SMS-сообщений sms/send
+
+| Параметр	        | Формат	|    Применение	|   Описание            |
+|-------------------|---------|---------------| ----------------------|
+|number	            | string  | 	Обязательно |	Номер телефона.       |
+|numbers	          | array	  | Обязательно   |	Номера телефонов.     |
+|sign	string	      |         | Обязательно   |	Имя отправителя.      |
+|text	string        |         |	Обязательно   |	Текст сообщения.      |
