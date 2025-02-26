@@ -1,0 +1,127 @@
+openapi: '3.0.3'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /region: {
+      "post": {
+        "operationId": "regionCreate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegionPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Данные о созданном регионе",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Region"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Ошибка создания"
+          }
+        }
+      }
+    }
+  /region/{id}: {
+      "get": {
+        "operationId": "regionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация о регионе РФ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Region"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Ошибка создания"
+          }
+        }
+      }
+    }
+  /regions: {
+      "get": {
+        "operationId": "regionsAll",
+        "responses": {
+          "200": {
+            "description": "Данные о регионах",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Region"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+components: 
+    "schemas": {
+      "Region": {
+        "required": [
+          "code",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer"
+          },
+          "about": {
+            "type": "string"
+          }
+        }
+      },
+      "RegionPost": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "integer"
+          },
+          "about": {
+            "type": "string"
+          }
+        }
+      }
+    }

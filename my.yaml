@@ -1,0 +1,137 @@
+openapi: "3.0.0"
+info:
+  title: Проекты
+  version: "1.0"
+paths:
+  /projects:
+    description: Проекты пользователя-волонтёра
+    get:
+      summary: Загрузить все проекты, в которых участвует пользователь-волонтёр
+      parameters:
+      - name: projects
+        description: Названия проектов
+        in: query
+        schema:
+          type: string
+
+      responses:
+        "200":
+          description: Загружен список проектов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  description: Список проектов
+                  required:
+                  - project_id
+                  - project_name
+                  - project_start
+                  - project_end
+                  properties:
+                    project_id:
+                      type: integer
+                      description: Уникальный идентификатор единицы проекта
+                      example: 12
+                    project_name:
+                      type: string
+                      description: Название проекта
+                      example: "Помощь беженцам"
+                    project_start:
+                      type: string
+                      description: Дата страта проекта
+                      example: "01-01-2025"
+                    project_end:
+                      type: string
+                      description: Дата окончания проекта
+                      example: "01-06-2025"
+
+        "500":
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                title: Ошибка сервера
+                type: string
+                example: Ошибка сервера
+
+  /resume:
+    post:
+      summary: Создать анкету пользователя-волонтёра
+      description: Создать в своем личном кабинете анкету волонтёра
+      parameters:
+      - in: body
+        name: ADD
+        description: Анкета волонтёра
+        schema:
+          type: object
+          description: Анкета волонтёра
+          required:
+          - user_id
+          - user_firstname
+          - user_sirname
+          - user_secondname
+          - user_birthday
+          - resume_exp
+          - resume_attach
+          properties:
+            id:
+              type: integer
+              description: Уникальный идентификатор пользователя
+              example: 456
+            user_firstname:
+              type: string
+              description: Имя пользователя
+              example: "Иван"
+            user-sirname:
+              type: string
+              description: Фамилия пользователя
+              example: "Иванов"
+            user_secondname:
+              type: string
+              description: Отчество
+              example: "Иванов"
+            user-birthdate:
+              type: string
+              description: Дата рождения пользователя
+              example: "01-01-1987"
+            resume-exper:
+              type: string
+              description: Опыт участия пользователя в других проектах или отсутствие подобного опыта
+              example: "Опыт участия на проекте..."
+            resume-attach:
+              type: string
+              form: binary
+              Content-Type: multipart/form-data; boundary=AaB03x
+              Content-Disposition: form-data; filename="experiencephoto.jpg"
+              description: Фото пользователя
+              example: Фото пользователя
+
+      responses:
+        "201":
+          description: Анкета волонтёра создана
+          content:
+            application/json:
+              schema:
+                title: Анкета создана
+                type: string
+                example: Анкета создана
+
+        "400":
+          description: Некорректный запрос серверу
+          content:
+            application/json:
+              schema:
+                title: Некорректный запрос
+                type: string
+                example: Некорректный запрос
+
+        "500":
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                title: Ошибка сервера
+                type: string
+                example: Ошибка сервера
