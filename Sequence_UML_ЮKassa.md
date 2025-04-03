@@ -1,7 +1,6 @@
-# docs-as-code
-Хранение документации
+# Sequence-диаграмма
 
-# Заголовок - Sequence Diagram 
+# ЮKassa
 
 * код
 * рисунок диаграммы
