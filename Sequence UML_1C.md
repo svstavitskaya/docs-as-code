@@ -17,9 +17,9 @@ participant Database1С
 Пользователь -> UI : Нажимает на кнопку\n"Подать показания счётчика"
 UI -> Система : GET: http//domovenok/user_id/meter_readings/water\nОткрыть форму с данными из 1С
 Система -->> UI: Передать форму подачи показаний 
-Система -> Модуль_1С : GET: http://host/odata/standard.odata/\nAccountingRegister_Показания_Электроэнергия/SliceLast()?\n$filter=ЛицевойСчёт eq 11111111$format=json
-Модуль_1С -> Database_1С : Запросить крайнее значение\nпоказаний счетчика
-Database_1С -> Модуль_1С : Крайнее значение\nпоказаний счетчика
+Система -> Модуль1С : GET: http://host/odata/standard.odata/\nAccountingRegister_Показания_Электроэнергия/SliceLast()?\n$filter=ЛицевойСчёт eq 11111111$format=json
+Модуль_1С -> Database1С : Запросить крайнее значение\nпоказаний счетчика
+Database1С -> Модуль1С : Крайнее значение\nпоказаний счетчика
 
     alt Успеный кейс
     loop Response 200
@@ -28,8 +28,8 @@ Database_1С -> Модуль_1С : Крайнее значение\nпоказа
 UI -> Пользователь : Отображает форму подачи показаний\nс заполненным полем\nпредыдущих показаний по счётчику
 Пользователь -> UI : Заполняет поля формы новыми данными\nНажимает кнопку "Отправить"
 UI -> Система : POST: http//domovenok/user_id/meter_readings/water\nОтправка заполненной формы
-Система -> Модуль_1С : PATCH: http://host/base/odata/standard.odata/\nAccountRegister_Электроэнергия(guid'11111111')?\n$format=json HTTP/1.1
-Модуль_1С -> Database_1С : Обновление данных по показаниям
+Система -> Модуль1С : PATCH: http://host/base/odata/standard.odata/\nAccountRegister_Электроэнергия(guid'11111111')?\n$format=json HTTP/1.1
+Модуль_1С -> Database1С : Обновление данных по показаниям
 Модуль_1С -> Система : Response 200 "success"
 Система -->> UI: Открыть сообщение об успешной\nотправке данных
 UI -->> Пользователь : Отображение сообщения
