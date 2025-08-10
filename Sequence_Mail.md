@@ -15,8 +15,8 @@ participant БД
 participant Майло.пост_API
 
 Пользователь -> UI : Нажимает на кнопку\n"Создать рассылку"
-UI -> Система : GET: https://domovenok/user_name/send-mail\nОткрыть страницу формы рассылки
-Система -> UI : Передает страницу формы\nhttps://domovenok/user_name/send-mail
+UI -> Система : GET: https:/book-shop.ru/user_name/send-mail\nОткрыть страницу формы рассылки
+Система -> UI : Передает страницу формы\nhttps://book-shop.ru/user_name/send-mail
 UI -->> Пользователь : Отображает страницу
 Пользователь -> Система : Нажимает на кнопку\n"Сохранить черовик"
 Система -> БД : Сохраняет созданную рассылку в БД
