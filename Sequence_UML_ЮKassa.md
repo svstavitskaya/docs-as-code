@@ -15,7 +15,7 @@ participant БД
 participant ЮKassa_API
 
 Пользователь -> UI : Нажимает на кнопку\n"Оплатить счет"
-UI -> Система: GET http//domovenok.ru/bank_details\nЗапрос на оплату счета
+UI -> Система: GET http//book-shop.ru/bank_details\nЗапрос на оплату счета
 Система -> БД : Сформировать данные\nдля оплаты счета
 БД -->>Система : В таблице order присваивается\nстатус оплаты "pending" 
 Система -> ЮKassa_API : POST:\nhttps://api.yookassa.ru/v3/payments
